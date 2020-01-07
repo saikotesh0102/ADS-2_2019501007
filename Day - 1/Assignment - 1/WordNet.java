@@ -4,14 +4,14 @@ import java.util.*;
 
 public class WordNet {
     ArrayList<String> synID;
-    ArrayList<String> synsets;
-    ArrayList<String> hypernymID;
-    ArrayList<String> hypernyms;
+    ArrayList<String> Synsets;
+    ArrayList<String> Hypernyms;
 
     // constructor takes the name of the two input files
     public WordNet(String synsets, String hypernyms){
-        this.synsets = new ArrayList<String>();
-        this.hypernyms = new ArrayList<String>();
+        this.Synsets = new ArrayList<String>();
+        this.Hypernyms = new ArrayList<String>();
+        this.synID = new ArrayList<String>();
     }
  
     // returns all WordNet nouns
@@ -41,11 +41,17 @@ public class WordNet {
         String str; 
         while ((str = read.readLine()) != null){
             String[] ID = str.split(",");
-            // if(ID[0] != null){
-            //     synID.add(ID[0]);
-            // }
-            System.out.println(Arrays.toString(ID));
+            if(ID[0] != null){
+                synID.add(ID[0]);
+            }
+
+            if(ID[1] != null){
+                Synsets.add(ID[1]);
+            }
         }
+        // for (int i = 0; i < synID.size(); i++) {
+        //     System.out.println(synID.get(i));
+        // }
         read.close();
     }
 
@@ -55,10 +61,9 @@ public class WordNet {
         String str; 
         while ((str = read.readLine()) != null){
             String[] ID = str.split(",");
-            // if(ID[1] != null){
-            //     hypernymID.add(ID[1]);
-            // }
-            System.out.println(Arrays.toString(ID));
+            if(ID.length > 1){
+                Hypernyms.add(ID[1]);
+            }
         }
         read.close();
     }
