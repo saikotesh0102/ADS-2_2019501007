@@ -99,7 +99,7 @@ public class WordNet {
     // do unit testing of this class
     public static void main(String[] args) throws Exception{
         WordNet net = new WordNet("synsets", "hypernyms");
-        net.parseSynsets("synsets");
-        net.parseHypernyms("hypernyms");
+        // net.parseSynsets("synsets");
+        // net.parseHypernyms("hypernyms");
     }
 }
