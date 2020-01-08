@@ -6,14 +6,16 @@ public class WordNet {
     ArrayList<String> synID;
     ArrayList<String> Synsets;
     ArrayList<String> Hypernyms;
-    DiGraph[] edges;
-    DiGraph[] vertices;
+    ArrayList<String> edges;
+    DiGraph vertices;
 
     // constructor takes the name of the two input files
     public WordNet(String synsets, String hypernyms){
         this.Synsets = new ArrayList<String>();
         this.Hypernyms = new ArrayList<String>();
         this.synID = new ArrayList<String>();
+        this.edges = new ArrayList<String>();
+        this.vertices = new DiGraph(synID.size());
     }
  
     // returns all WordNet nouns
@@ -60,13 +62,22 @@ public class WordNet {
     private void parseHypernyms(String hypernyms) throws Exception{
         BufferedReader read = new BufferedReader(new FileReader(hypernyms + ".txt"));
 
-        String str; 
+        String str;
+        int count = 0;
         while ((str = read.readLine()) != null){
             String[] ID = str.split(",");
-            if(ID.length > 1){
-                for(int i = 1; i < ID.length; i++){
-                    Hypernyms.add(ID[i]);
-                }
+            // if(ID.length > 1){
+            //     for(int i = 1; i < ID.length; i++){
+            //         Hypernyms.add(ID[i]);
+            //     }
+            // }
+            Hypernyms.add(ID[0]);
+            for (int i = 1; i < ID.length; i++) {
+                vertices.addEdge(Integer.parseInt(ID[count]), Integer.parseInt(ID[i]));
+            }
+
+            for (int i = 1; i < ID.length; i++) {
+                edges.add(ID[i]);
             }
         }
         // for (int i = 0; i < Hypernyms.size(); i++) {
