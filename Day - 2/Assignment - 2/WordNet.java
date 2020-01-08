@@ -10,12 +10,21 @@ public class WordNet {
     DiGraph vertices;
 
     // constructor takes the name of the two input files
-    public WordNet(String synsets, String hypernyms){
+    public WordNet(String synsets, String hypernyms) throws Exception{
         this.Synsets = new ArrayList<String>();
         this.Hypernyms = new ArrayList<String>();
         this.synID = new ArrayList<String>();
         this.edges = new ArrayList<String>();
+        this.parseSynsets(synsets);
+        // System.out.println(synID.size());
         this.vertices = new DiGraph(synID.size());
+        this.parseHypernyms(hypernyms);
+        //System.out.println(vertices.size());
+        int count = 0;
+        for (int i = 0; i < vertices.size(); i++) {
+            count = count + vertices.adj[i].size();
+        }
+        System.out.println(count);
     }
  
     // returns all WordNet nouns

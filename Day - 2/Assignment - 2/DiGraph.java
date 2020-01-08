@@ -2,8 +2,8 @@ import java.util.*;
 import java.lang.*;
 
 public class DiGraph{
-    private final int V;
-    private final Bag<Integer>[] adj;
+    public final int V;
+    public final Bag<Integer>[] adj;
 
     public DiGraph(int V){
         this.V = V;
@@ -20,5 +20,9 @@ public class DiGraph{
 
     public Iterable<Integer> adj(int v){
         return adj[v];
+    }
+
+    public int size(){
+        return adj.length;
     }
 }
