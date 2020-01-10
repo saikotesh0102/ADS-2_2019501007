@@ -1,11 +1,11 @@
 import java.util.*;
 import java.lang.*;
 
-public class DiGraph{
-    public final int V;
+public class Digraph{
+    private final int V;
     public final Bag<Integer>[] adj;
 
-    public DiGraph(int V){
+    public Digraph(int V){
         this.V = V;
         adj = (Bag <Integer>[]) new Bag[V];
         
@@ -24,5 +24,9 @@ public class DiGraph{
 
     public int size(){
         return adj.length;
+    }
+
+    public int V(){
+        return V;
     }
 }

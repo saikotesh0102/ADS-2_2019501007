@@ -7,7 +7,7 @@ public class WordNet {
     ArrayList<String> Synsets;
     ArrayList<String> Hypernyms;
     ArrayList<String> edges;
-    DiGraph vertices;
+    Digraph vertices;
 
     // constructor takes the name of the two input files
     public WordNet(String synsets, String hypernyms) throws Exception{
@@ -17,7 +17,7 @@ public class WordNet {
         this.edges = new ArrayList<String>();
         this.parseSynsets(synsets);
         // System.out.println(synID.size());
-        this.vertices = new DiGraph(synID.size());
+        this.vertices = new Digraph(synID.size());
         this.parseHypernyms(hypernyms);
         //System.out.println(vertices.size());
         int count = 0;
