@@ -1,13 +1,9 @@
 import java.util.Arrays;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 import java.util.Scanner;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.Collections;
-import java.util.Comparator;
 
 public class Solution{
     private HashMap<Integer,String> emailID;
@@ -46,6 +42,19 @@ public class Solution{
             }
             emailCount.put(emailID.get(toIndex), graph.indegree(toIndex));
         }
+        // System.out.println(emailCount.size());
+        ArrayList<Integer> values = new ArrayList<Integer>(emailCount.values());
+        Collections.sort(values,Collections.reverseOrder());
+        Scanner scan = new Scanner(System.in);
+        int index = scan.nextInt();
+        for (int i = 0; i < index; i++) {
+            int a = values.get(i);
+            for(String X : emailCount.keySet()){
+                if(a == emailCount.get(X)){
+                    System.out.println(X + "," + a);
+                }
+            }
+        }
         // System.out.println(graph.E());
 
         // System.out.println(emailID.get(179170) + ", " + emailCount.get(emailID.get(179170)));
@@ -59,41 +68,8 @@ public class Solution{
         // System.out.println(emailID.get(70524) + ", " + emailCount.get(emailID.get(70524)));
         // System.out.println(emailID.get(994) + ", " + emailCount.get(emailID.get(994)));
     }
-
-    // public int compareTo(emailcount<Integer,Integer> e1, emailCount<Integer,Integer> e2){
-    //     int value1 = e1.get();
-    //     int value2 = e2.get();
-    // }
-
-    public HashMap<String,Integer> sortHashMap(HashMap<String,Integer> hm){
-        List<String> mapKeys = new ArrayList<>(hm.keySet());
-        List<Integer> mapValues = new ArrayList<>(hm.values());
-
-        HashMap<String, Integer> sortedMap = new HashMap<>();
-        Iterator<Integer> valueIt = mapValues.iterator();
-
-        while (valueIt.hasNext()) {
-            Integer val = valueIt.next();
-            Iterator<String> keyIt = mapKeys.iterator();
-    
-            while (keyIt.hasNext()) {
-                String key = keyIt.next();
-                Integer comp1 = hm.get(key);
-                Integer comp2 = val;
-    
-                if (comp1 == comp2) {
-                    keyIt.remove();
-                    sortedMap.put(key, val);
-                    break;
-                }
-            }
-        }
-        // System.out.println(sortedMap.keySet());
-        return sortedMap;
-    }
-
     public static void main(String[] args) throws Exception{
         Solution obj = new Solution("emails", "logs");
-        obj.sortHashMap(obj.emailCount);
+        // obj.sortHashMap(obj.emailCount);
     }
 }
