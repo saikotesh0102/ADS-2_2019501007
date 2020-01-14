@@ -64,6 +64,9 @@ public class SAP {
  
     // length of shortest ancestral path between any vertex in v and any vertex in w; -1 if no such path
     public int length(Iterable<Integer> v, Iterable<Integer> w) {
+        if (v == null || w == null) {
+            throw new IllegalArgumentException();
+        }
         if (!isValid(v, w)) {
             throw new IllegalArgumentException();
         }
@@ -86,6 +89,9 @@ public class SAP {
  
     // a common ancestor that participates in shortest ancestral path; -1 if no such path
     public int ancestor(Iterable<Integer> v, Iterable<Integer> w) {
+        if (v == null || w == null) {
+            throw new IllegalArgumentException();
+        }
         if (!isValid(v, w)) {
             throw new IllegalArgumentException();
         }
@@ -116,13 +122,13 @@ public class SAP {
 
     private boolean isValid(Iterable<Integer> v, Iterable<Integer> w) {
         for (Integer integer : w) {
-            if (!isValid(integer) && integer == null) {
+            if (!isValid(integer)) {
                 return false;
             }
         }
 
         for (Integer integer : v) {
-            if (!isValid(integer) && integer == null) {
+            if (!isValid(integer)) {
                 return false;
             }
         }
@@ -131,6 +137,7 @@ public class SAP {
  
     // do unit testing of this class
     public static void main(String[] args) {
-        
+        // In input = new In("digraph1.txt");
+        // Digraph graph = new Digraph(input);
     }
 }
