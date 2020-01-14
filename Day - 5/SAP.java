@@ -16,6 +16,10 @@ public class SAP {
  
     // length of shortest ancestral path between v and w; -1 if no such path
     public int length(int v, int w) {
+        if (!((v >= 0 && v <= graph.V() - 1) && (w >= 0 && w <= graph.V() - 1))) {
+            throw new IllegalArgumentException();
+        }
+
         g1 = new BreadthFirstDirectedPaths(graph, v);
         g2 = new BreadthFirstDirectedPaths(graph, w);
 
@@ -34,6 +38,9 @@ public class SAP {
  
     // a common ancestor of v and w that participates in a shortest ancestral path; -1 if no such path
     public int ancestor(int v, int w) {
+        if (!((v >= 0 && v <= graph.V() - 1) && (w >= 0 && w <= graph.V() - 1))) {
+            throw new IllegalArgumentException();
+        }
         g1 = new BreadthFirstDirectedPaths(graph, v);
         g2 = new BreadthFirstDirectedPaths(graph, w);
 
@@ -57,6 +64,9 @@ public class SAP {
  
     // length of shortest ancestral path between any vertex in v and any vertex in w; -1 if no such path
     public int length(Iterable<Integer> v, Iterable<Integer> w) {
+        if (!isValid(v, w)) {
+            throw new IllegalArgumentException();
+        }
         g1 = new BreadthFirstDirectedPaths(graph, v);
         g2 = new BreadthFirstDirectedPaths(graph, w);
 
@@ -76,6 +86,9 @@ public class SAP {
  
     // a common ancestor that participates in shortest ancestral path; -1 if no such path
     public int ancestor(Iterable<Integer> v, Iterable<Integer> w) {
+        if (!isValid(v, w)) {
+            throw new IllegalArgumentException();
+        }
         g1 = new BreadthFirstDirectedPaths(graph, v);
         g2 = new BreadthFirstDirectedPaths(graph, w);
 
@@ -96,9 +109,28 @@ public class SAP {
         }     
         return result;
     }
+
+    private boolean isValid(int v) {
+        return (v >= 0 && v <= this.graph.V() - 1);
+    }
+
+    private boolean isValid(Iterable<Integer> v, Iterable<Integer> w) {
+        for (Integer integer : w) {
+            if (!isValid(integer)) {
+                return false;
+            }
+        }
+
+        for (Integer integer : v) {
+            if (!isValid(integer)) {
+                return false;
+            }
+        }
+        return true;
+    }
  
     // do unit testing of this class
     public static void main(String[] args) {
-
+        
     }
 }

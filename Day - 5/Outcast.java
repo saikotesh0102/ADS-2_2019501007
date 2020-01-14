@@ -29,4 +29,9 @@ public class Outcast {
         }
         return nouns[result];
     }
+
+    public static void main(String[] args) {
+        // WordNet wordnet = new WordNet(args[0], args[1]);
+        // Outcast outcast = new Outcast(wordnet);
+    }
 }

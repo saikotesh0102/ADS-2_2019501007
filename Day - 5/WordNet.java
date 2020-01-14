@@ -1,7 +1,7 @@
 /**
  * @author SaiKotesh0102
  */
-import java.util.Scanner;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -9,7 +9,7 @@ import java.util.Set;
 import edu.princeton.cs.algs4.Digraph;
 import edu.princeton.cs.algs4.BreadthFirstDirectedPaths;
 import edu.princeton.cs.algs4.DirectedCycle;
-import java.io.File;
+import edu.princeton.cs.algs4.In;
 
 public class WordNet {
     private final HashMap<Integer, String> idToStr;
@@ -17,7 +17,13 @@ public class WordNet {
     private final Digraph graph;
 
     // constructor takes the name of the two input files
-    public WordNet(String synsets, String hypernyms) throws Exception {
+    public WordNet(String synsets, String hypernyms) {
+        if (synsets == null) {
+            throw new IllegalArgumentException();
+        }
+        if (hypernyms == null) {
+            throw new IllegalArgumentException();
+        }
         this.idToStr = new HashMap<Integer, String>();
         this.strToID = new HashMap<String, Set<Integer>>();
         this.parseSynsets(synsets);
@@ -32,6 +38,9 @@ public class WordNet {
  
     // is the word a WordNet noun?
     public boolean isNoun(String word) {
+        if (word == null) {
+            throw new IllegalArgumentException();
+        }
         return this.strToID.containsKey(word);
     }
  
@@ -50,7 +59,9 @@ public class WordNet {
         for (int i : idToStr.keySet()) {
             if (g1.hasPathTo(i) && g2.hasPathTo(i)) {
                 int cur = g1.distTo(i) + g2.distTo(i);
-                result = Math.min(result, cur);
+                if (cur < result) {
+                	result = cur;
+                }
             }
         }
         return result;
@@ -84,12 +95,12 @@ public class WordNet {
         return val;
     }
 
-    private void parseSynsets(String synsets) throws Exception {
-        File file = new File("D:\\Study\\MSIT\\Algorithms and Data Structures - 2\\ADS-2_2019501007\\Day - 1\\Word Net\\" + synsets + ".txt");
+    private void parseSynsets(String synsets) {
+        // File file = new File("D:\\Study\\MSIT\\Algorithms and Data Structures - 2\\ADS-2_2019501007\\Day - 1\\Word Net\\" + synsets + ".txt");
         // BufferedReader read = new BufferedReader(new FileReader(file));
-        Scanner scan = new Scanner(file);
+        In scan = new In(synsets);
         while (scan.hasNextLine()) {
-            String[] ID = scan.nextLine().split(",");
+            String[] ID = scan.readLine().split(",");
             if (ID.length < 2) {
                 continue;
             }
@@ -101,15 +112,15 @@ public class WordNet {
                 }
             }
         }
-        scan.close();
+        // scan.close();
     }
 
-    private void parseHypernyms(String hypernyms) throws Exception {
-        File file = new File("D:\\Study\\MSIT\\Algorithms and Data Structures - 2\\ADS-2_2019501007\\Day - 1\\Word Net\\" + hypernyms + ".txt");
+    private void parseHypernyms(String hypernyms) {
+        // File file = new File("D:\\Study\\MSIT\\Algorithms and Data Structures - 2\\ADS-2_2019501007\\Day - 1\\Word Net\\" + hypernyms + ".txt");
         // BufferedReader read = new BufferedReader(new FileReader(file));
-        Scanner scan = new Scanner(file);
+        In scan = new In(hypernyms);
         while (scan.hasNextLine()) {
-            String[] ID = scan.nextLine().split(",");
+            String[] ID = scan.readLine().split(",");
             if (ID.length < 2) {
                 continue;
             }
@@ -117,7 +128,7 @@ public class WordNet {
                 this.graph.addEdge(Integer.parseInt(ID[0]), Integer.parseInt(ID[i]));
             }
         }
-        scan.close();
+        // scan.close();
 
         if (hasCycle()) {
             throw new IllegalArgumentException("Given graph is not a DAG.");
