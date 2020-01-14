@@ -116,13 +116,13 @@ public class SAP {
 
     private boolean isValid(Iterable<Integer> v, Iterable<Integer> w) {
         for (Integer integer : w) {
-            if (!isValid(integer)) {
+            if (!isValid(integer) && integer == null) {
                 return false;
             }
         }
 
         for (Integer integer : v) {
-            if (!isValid(integer)) {
+            if (!isValid(integer) && integer == null) {
                 return false;
             }
         }

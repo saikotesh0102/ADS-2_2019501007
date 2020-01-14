@@ -18,10 +18,7 @@ public class WordNet {
 
     // constructor takes the name of the two input files
     public WordNet(String synsets, String hypernyms) {
-        if (synsets == null) {
-            throw new IllegalArgumentException();
-        }
-        if (hypernyms == null) {
+        if (synsets == null || hypernyms == null) {
             throw new IllegalArgumentException();
         }
         this.idToStr = new HashMap<Integer, String>();
@@ -98,6 +95,9 @@ public class WordNet {
     private void parseSynsets(String synsets) {
         // File file = new File("D:\\Study\\MSIT\\Algorithms and Data Structures - 2\\ADS-2_2019501007\\Day - 1\\Word Net\\" + synsets + ".txt");
         // BufferedReader read = new BufferedReader(new FileReader(file));
+        if (synsets == null) {
+            throw new IllegalArgumentException();
+        }
         In scan = new In(synsets);
         while (scan.hasNextLine()) {
             String[] ID = scan.readLine().split(",");
@@ -118,6 +118,9 @@ public class WordNet {
     private void parseHypernyms(String hypernyms) {
         // File file = new File("D:\\Study\\MSIT\\Algorithms and Data Structures - 2\\ADS-2_2019501007\\Day - 1\\Word Net\\" + hypernyms + ".txt");
         // BufferedReader read = new BufferedReader(new FileReader(file));
+        if (hypernyms == null) {
+            throw new IllegalArgumentException();
+        }
         In scan = new In(hypernyms);
         while (scan.hasNextLine()) {
             String[] ID = scan.readLine().split(",");
