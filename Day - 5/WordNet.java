@@ -56,10 +56,14 @@ public class WordNet {
         for (int i : idToStr.keySet()) {
             if (g1.hasPathTo(i) && g2.hasPathTo(i)) {
                 int cur = g1.distTo(i) + g2.distTo(i);
-                if (cur < result) {
-                	result = cur;
-                }
+                // if (cur < result) {
+                // 	result = cur;
+                // }
+                result = Math.min(result, cur);
             }
+        }
+        if (result == Integer.MAX_VALUE) {
+            return -1;
         }
         return result;
     }

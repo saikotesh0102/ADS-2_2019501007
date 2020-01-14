@@ -77,8 +77,7 @@ public class SAP {
         int minLength = Integer.MAX_VALUE;
         for (int i = 0; i < vertex; i++) {
             if (g1.hasPathTo(i) && g2.hasPathTo(i)) {
-                minLength = Math.min(minLength, 
-                        g1.distTo(i) + g2.distTo(i));
+                minLength = Math.min(minLength, g1.distTo(i) + g2.distTo(i));
             }
         }
         if (minLength == Integer.MAX_VALUE) {
