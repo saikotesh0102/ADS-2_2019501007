@@ -162,7 +162,6 @@ public class SAP {
         }
         return true;
     }
-
     public static void main(String[] args) {
         // In input = new In("digraph1.txt");
         // Digraph graph = new Digraph(input);

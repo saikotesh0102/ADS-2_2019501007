@@ -1,15 +1,24 @@
 /**
  * @author SaiKotesh0102
  */
-
+/**
+ * Outcast class is used to identify the Noun which is least related to others.
+ */
 public class Outcast {
 
     private final WordNet wordNet;
-
+    /**
+     * Constructor that takes WordNet as parameter
+     * @param wordnet
+     */
     public Outcast(WordNet wordnet) {
         this.wordNet = wordnet;        
     }
-
+    /**
+     * Method to compute the sum of the distances between each noun and every other one
+     * @param nouns
+     * @return Noun which distance is maximum so that it will not contribute to the sum
+     */
     public String outcast(String[] nouns) {
         int result = -1;
         int maxDis = -1;
@@ -29,7 +38,6 @@ public class Outcast {
         }
         return nouns[result];
     }
-
     public static void main(String[] args) {
         // WordNet wordnet = new WordNet(args[0], args[1]);
         // Outcast outcast = new Outcast(wordnet);
