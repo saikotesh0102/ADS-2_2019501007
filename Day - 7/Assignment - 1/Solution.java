@@ -17,7 +17,11 @@ public class Solution{
 	public static void ReadInput(String inputFile, String outputFile) throws Exception {
 		Scanner scan = new Scanner(new File(inputFile));
 		int no_of_inputs = Integer.parseInt(scan.nextLine());
-		String[] s = new String[no_of_inputs];
+		String[] str = new String[no_of_inputs];
+		int[] len = new int[no_of_inputs];
+		for(int i = 0; i < no_of_inputs; i++) {
+			
+		}
 		LongestRepeatedSubstring lrs = new LongestRepeatedSubstring();
 		scan.close();
 	}
