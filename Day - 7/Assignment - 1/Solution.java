@@ -20,7 +20,9 @@ public class Solution{
 		String[] str = new String[no_of_inputs];
 		int[] len = new int[no_of_inputs];
 		for(int i = 0; i < no_of_inputs; i++) {
-			
+			String[] data = scan.nextLine().split(",");
+			str[i] = data[0];
+			len[i] = Integer.parseInt(data[1]);
 		}
 		LongestRepeatedSubstring lrs = new LongestRepeatedSubstring();
 		scan.close();
