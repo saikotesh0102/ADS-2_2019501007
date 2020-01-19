@@ -139,7 +139,14 @@ public class WordNet {
             for (String s : words) {
                 idToStr.put(Integer.parseInt(ID[0]), ID[1]);
                 if (!strToID.containsKey(s)) {
-                    strToID.put(s, new HashSet<Integer>());
+                    HashSet<Integer> set = new HashSet<Integer>();
+                    set.add(Integer.parseInt(ID[0]));
+                    strToID.put(s,set);
+                }
+                else {
+                    Set<Integer> value = strToID.get(s);
+                    value.add(Integer.parseInt(ID[0]));
+                    strToID.put(s, value);
                 }
             }
         }
