@@ -141,7 +141,7 @@ public class WordNet {
                 if (!strToID.containsKey(s)) {
                     HashSet<Integer> set = new HashSet<Integer>();
                     set.add(Integer.parseInt(ID[0]));
-                    strToID.put(s,set);
+                    strToID.put(s, set); 
                 }
                 else {
                     Set<Integer> value = strToID.get(s);
