@@ -25,16 +25,16 @@ public class Outcast {
         int[] dis = new int[nouns.length];
         for (int i = 0; i < nouns.length; i++) {
             for (int j = i+1; j < nouns.length; j++) {
-            	int curDis = wordNet.distance(nouns[i], nouns[j]);
+                int curDis = wordNet.distance(nouns[i], nouns[j]);
                 dis[i] += curDis;
                 dis[j] += curDis;
             }            
         }
         for (int i = 0; i < dis.length; i++) {
-        	if (dis[i] > maxDis) {
-        		maxDis = dis[i];
-        		result = i;
-        	}
+            if (dis[i] > maxDis) {
+                maxDis = dis[i];
+                result = i;
+            }
         }
         return nouns[result];
     }
