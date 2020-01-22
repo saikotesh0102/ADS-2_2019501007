@@ -1,28 +1,45 @@
 public class SeamCarver {
 
+	private Picture picture;
 	// create a seam carver object based on the given picture
 	public SeamCarver(Picture picture) {
-
+		if(picture == null) { 
+			throw new IllegalArgumentException();
+		}
+		this.picture = new Picture(picture);
 	}
  
 	// current picture
 	public Picture picture() {
-
+		return new Picture(this.picture);
 	}
  
 	// width of current picture
 	public int width() {
-		return -1;
+		return this.picture.width();
 	}
  
 	// height of current picture
 	public int height() {
-		return -1;
+		return this.picture.width();
 	}
  
 	// energy of pixel at column x and row y
 	public double energy(int x, int y) {
-		return null;
+		if (x < 0 || y < 0 || x > width() - 1 || y > height() - 1) {
+            throw new IllegalArgumentException();
+        }
+
+        if (x == 0 || y == 0 || x == width() - 1 || y == height() - 1) {
+            return 1000;
+        }
+
+        Color top    = this.picture.get(x, y + 1);
+        Color bottom = this.picture.get(x, y - 1);
+        Color left   = this.picture.get(x - 1, y);
+        Color right  = this.picture.get(x + 1, y);
+
+        return Math.sqrt(squareGradient(top, bottom) + squareGradient(left, right));
 	}
  
 	// sequence of indices for horizontal seam
