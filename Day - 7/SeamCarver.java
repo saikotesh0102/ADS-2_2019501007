@@ -41,6 +41,10 @@ public class SeamCarver {
 
         return Math.sqrt(squareGradient(top, bottom) + squareGradient(left, right));
 	}
+
+	private double squareGradient(Color first, Color second) {
+        return Math.pow(first.getRed() - second.getRed(), 2) + Math.pow(first.getGreen() - second.getGreen(), 2) + Math.pow(first.getBlue()  - second.getBlue(), 2);
+    }
  
 	// sequence of indices for horizontal seam
 	public int[] findHorizontalSeam() {
