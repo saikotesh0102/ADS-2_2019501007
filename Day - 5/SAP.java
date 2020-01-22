@@ -87,6 +87,7 @@ public class SAP {
         if (!isValid(v, w)) {
             throw new IllegalArgumentException();
         }
+
         g1 = new BreadthFirstDirectedPaths(graph, v);
         g2 = new BreadthFirstDirectedPaths(graph, w);
 
@@ -115,6 +116,7 @@ public class SAP {
         if (!isValid(v, w)) {
             throw new IllegalArgumentException();
         }
+        
         g1 = new BreadthFirstDirectedPaths(graph, v);
         g2 = new BreadthFirstDirectedPaths(graph, w);
 
