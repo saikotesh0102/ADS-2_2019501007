@@ -1,8 +1,0 @@
-topK
-4
-hello
-right
-rights
-words
-within
-is
