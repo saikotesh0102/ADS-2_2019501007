@@ -1,4 +1,4 @@
-// import edu.princeton.cs.algs4.Picture;
+import edu.princeton.cs.algs4.Picture;
 import java.awt.Color;
 
 public class SeamCarver {
@@ -12,7 +12,7 @@ public class SeamCarver {
 	
 	// create a seam carver object based on the given picture
 	public SeamCarver(Picture picture) {
-		if(picture == null) { 
+		if (picture == null) { 
 			throw new IllegalArgumentException();
 		}
 		this.picture = new Picture(picture);
@@ -176,11 +176,11 @@ public class SeamCarver {
 
 	// remove horizontal seam from current picture
 	public void removeHorizontalSeam(int[] seam) {
-		if (seam == null || this.width() <= 1 || seam.length != this.height()) {
+		if (seam == null || this.height() <= 1 || seam.length != this.width()) {
             throw new IllegalArgumentException();
 		}
 		
-		Picture newPicture = new Picture(this.width() - 1, this.height());
+		Picture newPicture = new Picture(this.width(), this.height() - 1);
 
 		int prevSeam = seam[0];
 
