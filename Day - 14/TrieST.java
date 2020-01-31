@@ -7,7 +7,7 @@
  *  A string symbol table for extended ASCII strings, implemented
  *  using a 256-way trie.
  *
- *  % java TrieST < shellsST.txt 
+ *  % java TrieST < shellsST.txt
  *  by 4
  *  sea 6
  *  sells 1
@@ -18,7 +18,7 @@
  *
  ******************************************************************************/
 
-package edu.princeton.cs.algs4;
+// package edu.princeton.cs.algs4;
 
 /**
  *  The {@code TrieST} class represents an symbol table of key-value
@@ -47,6 +47,11 @@ package edu.princeton.cs.algs4;
  *  For additional documentation, see <a href="http://algs4.cs.princeton.edu/52trie">Section 5.2</a> of
  *  <i>Algorithms, 4th Edition</i> by Robert Sedgewick and Kevin Wayne.
  */
+import edu.princeton.cs.algs4.Queue;
+import edu.princeton.cs.algs4.StdIn;
+import edu.princeton.cs.algs4.StdOut;
+import java.util.Iterator;
+
 public class TrieST<Value> {
     private static final int R = 256;        // extended ASCII
 
@@ -80,7 +85,12 @@ public class TrieST<Value> {
         if (x == null) return null;
         return (Value) x.val;
     }
-
+    public Node getNode(String key) {
+        if (key == null) throw new IllegalArgumentException("argument to get() is null");
+        Node x = get(root, key, 0);
+        if (x == null) return null;
+        return x;
+    }
     /**
      * Does this symbol table contain the given key?
      * @param key the key
@@ -97,7 +107,7 @@ public class TrieST<Value> {
         if (x == null) return null;
         if (d == key.length()) return x;
         char c = key.charAt(d);
-        return get(x.next[c], key, d+1);
+        return get(x.next[c - 65], key, d+1);
     }
 
     /**
@@ -122,7 +132,7 @@ public class TrieST<Value> {
             return x;
         }
         char c = key.charAt(d);
-        x.next[c] = put(x.next[c], key, val, d+1);
+        x.next[c - 65] = put(x.next[c-65], key, val, d+1);
         return x;
     }
 
@@ -151,14 +161,19 @@ public class TrieST<Value> {
     public Iterable<String> keys() {
         return keysWithPrefix("");
     }
-
+    public boolean hasPrefix(String word) {
+        if (getNode(word) != null) {
+            return true;
+        }
+        return false;
+    }
     /**
      * Returns all of the keys in the set that start with {@code prefix}.
      * @param prefix the prefix
      * @return all of the keys in the set that start with {@code prefix},
      *     as an iterable
      */
-    public Iterable<String> keysWithPrefix(String prefix) {
+    public Queue<String> keysWithPrefix(String prefix) {
         Queue<String> results = new Queue<String>();
         Node x = get(root, prefix, 0);
         collect(x, new StringBuilder(prefix), results);
@@ -271,63 +286,39 @@ public class TrieST<Value> {
      *
      * @param args the command-line arguments
      */
-    public static void main(String[] args) {
+    // public static void main(String[] args) {
 
-        // build symbol table from standard input
-        TrieST<Integer> st = new TrieST<Integer>();
-        for (int i = 0; !StdIn.isEmpty(); i++) {
-            String key = StdIn.readString();
-            st.put(key, i);
-        }
+    //     // build symbol table from standard input
+    //     TrieST<Integer> st = new TrieST<Integer>();
+    //     for (int i = 0; !StdIn.isEmpty(); i++) {
+    //         String key = StdIn.readString();
+    //         st.put(key, i);
+    //     }
 
-        // print results
-        if (st.size() < 100) {
-            StdOut.println("keys(\"\"):");
-            for (String key : st.keys()) {
-                StdOut.println(key + " " + st.get(key));
-            }
-            StdOut.println();
-        }
+    //     // print results
+    //     if (st.size() < 100) {
+    //         StdOut.println("keys(\"\"):");
+    //         for (String key : st.keys()) {
+    //             StdOut.println(key + " " + st.get(key));
+    //         }
+    //         StdOut.println();
+    //     }
 
-        StdOut.println("longestPrefixOf(\"shellsort\"):");
-        StdOut.println(st.longestPrefixOf("shellsort"));
-        StdOut.println();
+    //     StdOut.println("longestPrefixOf(\"shellsort\"):");
+    //     StdOut.println(st.longestPrefixOf("shellsort"));
+    //     StdOut.println();
 
-        StdOut.println("longestPrefixOf(\"quicksort\"):");
-        StdOut.println(st.longestPrefixOf("quicksort"));
-        StdOut.println();
+    //     StdOut.println("longestPrefixOf(\"quicksort\"):");
+    //     StdOut.println(st.longestPrefixOf("quicksort"));
+    //     StdOut.println();
 
-        StdOut.println("keysWithPrefix(\"shor\"):");
-        for (String s : st.keysWithPrefix("shor"))
-            StdOut.println(s);
-        StdOut.println();
+    //     StdOut.println("keysWithPrefix(\"shor\"):");
+    //     for (String s : st.keysWithPrefix("shor"))
+    //         StdOut.println(s);
+    //     StdOut.println();
 
-        StdOut.println("keysThatMatch(\".he.l.\"):");
-        for (String s : st.keysThatMatch(".he.l."))
-            StdOut.println(s);
-    }
+    //     StdOut.println("keysThatMatch(\".he.l.\"):");
+    //     for (String s : st.keysThatMatch(".he.l."))
+    //         StdOut.println(s);
+    // }
 }
-
-/******************************************************************************
- *  Copyright 2002-2016, Robert Sedgewick and Kevin Wayne.
- *
- *  This file is part of algs4.jar, which accompanies the textbook
- *
- *      Algorithms, 4th edition by Robert Sedgewick and Kevin Wayne,
- *      Addison-Wesley Professional, 2011, ISBN 0-321-57351-X.
- *      http://algs4.cs.princeton.edu
- *
- *
- *  algs4.jar is free software: you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation, either version 3 of the License, or
- *  (at your option) any later version.
- *
- *  algs4.jar is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
- *
- *  You should have received a copy of the GNU General Public License
- *  along with algs4.jar.  If not, see http://www.gnu.org/licenses.
- ******************************************************************************/
