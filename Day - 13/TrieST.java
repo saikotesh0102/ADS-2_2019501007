@@ -18,7 +18,7 @@
  *
  ******************************************************************************/
 
-// package edu.princeton.cs.algs4;
+package edu.princeton.cs.algs4;
 
 /**
  *  The {@code TrieST} class represents an symbol table of key-value
@@ -47,10 +47,6 @@
  *  For additional documentation, see <a href="http://algs4.cs.princeton.edu/52trie">Section 5.2</a> of
  *  <i>Algorithms, 4th Edition</i> by Robert Sedgewick and Kevin Wayne.
  */
-import edu.princeton.cs.algs4.StdOut;
-import edu.princeton.cs.algs4.StdIn;
-import edu.princeton.cs.algs4.Queue;
-
 public class TrieST<Value> {
     private static final int R = 256;        // extended ASCII
 
@@ -104,13 +100,6 @@ public class TrieST<Value> {
         return get(x.next[c], key, d+1);
     }
 
-    public Node getNode(String key) {
-        if (key == null) throw new IllegalArgumentException("argument to get() is null");
-        Node x = get(root, key, 0);
-        if (x == null) return null;
-        return x;
-    }
-
     /**
      * Inserts the key-value pair into the symbol table, overwriting the old value
      * with the new value if the key is already in the symbol table.
@@ -162,13 +151,6 @@ public class TrieST<Value> {
     public Iterable<String> keys() {
         return keysWithPrefix("");
     }
-
-    // public boolean hasPrefix(String word) {
-    //     if (getNode(word) != null) {
-    //         return true;
-    //     }
-    //     return false;
-    // }
 
     /**
      * Returns all of the keys in the set that start with {@code prefix}.
