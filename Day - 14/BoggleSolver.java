@@ -45,7 +45,7 @@ public class BoggleSolver {
 
         if (data.contains(word)) {
             switch (word.length()) {
-            case 0:
+            case 0 :
             case 1 : 
             case 2 : 
                 return 0;
