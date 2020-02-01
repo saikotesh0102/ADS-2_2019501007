@@ -12,8 +12,6 @@
 
 import java.util.Iterator;
 
-import edu.princeton.cs.algs4.Picture;
-
 /**
  *  The <tt>TrieSET</tt> class represents an ordered set of strings over
  *  the extended ASCII alphabet.
@@ -51,7 +49,7 @@ public class TrieSET implements Iterable<String> {
         private Node[] next = new Node[R];
         private boolean isString;
     }
-    
+
     /**
      * Initializes an empty set of strings.
      */
