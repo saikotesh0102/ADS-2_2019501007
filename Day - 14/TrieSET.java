@@ -242,7 +242,6 @@ public class TrieSET implements Iterable<String> {
         return x != null;
     }
 
-
     // /**
     //  * Unit tests the <tt>TrieSET</tt> data type.
     //  */
